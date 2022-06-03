@@ -19,6 +19,9 @@ const RestaurantList = () => {
         <p className="no-restaurants-found">
           No restaurants were found, add a restaurant and it will display here!
         </p>
+        {/* <Link to="/add" className="button">
+          Add a new property
+        </Link> */}
       </>
     );
   }
@@ -31,12 +34,16 @@ const RestaurantList = () => {
           {restaurants.map((restaurant) => {
             return (
               <li className="single-restaurant" key={restaurant.id}>
-                <li className="restaurant-image">{restaurant.image}</li>
-                <li className="restaurant-title">{restaurant.title}</li>
-                <li className="restaurant-description">
+                <img
+                  className="restaurant-image"
+                  src={restaurant.image}
+                  alt={restaurant.address}
+                />
+                <h2 className="restaurant-name">{restaurant.name}</h2>
+                <p className="restaurant-description">
                   {restaurant.description}
-                </li>
-                <button>Reserve Now → </button>
+                </p>
+                <button className="reserve-button">Reserve Now → </button>
               </li>
             );
           })}

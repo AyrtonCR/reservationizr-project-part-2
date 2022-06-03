@@ -1,0 +1,50 @@
+.restaurants-grid {
+}
+
+.main-title {
+}
+
+.restaurant-list {
+  list-style-type: none;
+  padding: 0rem;
+}
+
+.single-restaurant {
+  list-style-type: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  border: 0.1rem solid grey;
+  margin-bottom: 3rem;
+}
+
+.restaurant-image {
+  width: 96%;
+  padding: 0.8rem;
+}
+.restaurant-name {
+  margin: 0;
+  padding: 0rem 0.8rem;
+}
+
+.restaurant-description {
+  padding: 0rem 0.8rem;
+}
+
+.reserve-button {
+  max-width: 10rem;
+  margin: 0.8rem;
+  background: #6246ea;
+  border-radius: 0.25rem;
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #6246ea;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.login-btn:focus,
+.login-btn:hover {
+  background: white;
+  color: #6246ea;
+}
