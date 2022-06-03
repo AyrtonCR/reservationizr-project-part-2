@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const { celebrate, Joi, errors, Segments } = require("celebrate");
 const RestaurantModel = require("./models/RestaurantModel");
 const formatRestaurant = require("./formatRestaurants");
+
 app.use(cors());
 app.use(express.json());
 
