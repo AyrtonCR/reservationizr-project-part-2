@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const { celebrate, Joi, errors, Segments } = require("celebrate");
 const RestaurantModel = require("./models/RestaurantModel");
+const formatRestaurant = require("./formatRestaurants");
 app.use(cors());
 app.use(express.json());
 
@@ -15,11 +16,17 @@ app.get("/", async (request, response) => {
 app.get("/restaurants", async (request, response) => {
   const restaurants = await RestaurantModel.find();
   if (restaurants.length > 0) {
-    return response.status(200).json(restaurants);
+    const formattedRestaurant = restaurants.map((restaurant) => {
+      return formatRestaurant(restaurant);
+    });
+    response.status(200).json(formattedRestaurant);
   } else {
-    return response
-      .status(200)
-      .json({ message: "There are no saved restaurants yet" });
+    return (
+      response
+        .status(200)
+        // Should the response above be something else //
+        .json({ message: "There are no saved restaurants yet" })
+    );
   }
 });
 
