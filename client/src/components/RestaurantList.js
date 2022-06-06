@@ -3,25 +3,27 @@ import { useState, useEffect } from "react";
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:5001/restaurants");
       const data = await response.json();
       setRestaurants(data);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
-  if (restaurants < 1) {
+  if (isLoading) {
+    return <p>Loading please wait...</p>;
+  }
+  if (restaurants.length < 1) {
     return (
       <>
         <p className="no-restaurants-found">
-          No restaurants were found, add a restaurant and it will display here!
+          Sorry, no restaurants were found...
         </p>
-        {/* <Link to="/add" className="button">
-          Add a new property
-        </Link> */}
       </>
     );
   }
@@ -39,11 +41,15 @@ const RestaurantList = () => {
                   src={restaurant.image}
                   alt={restaurant.address}
                 />
-                <h2 className="restaurant-name">{restaurant.name}</h2>
-                <p className="restaurant-description">
-                  {restaurant.description}
-                </p>
-                <button className="reserve-button">Reserve Now → </button>
+                <div className="tablet-div-1">
+                  <h2 className="restaurant-name">{restaurant.name}</h2>
+                  <p className="restaurant-description">
+                    {restaurant.description}
+                  </p>
+                  <div className="button-mover">
+                    <button className="reserve-button">Reserve Now → </button>
+                  </div>
+                </div>
               </li>
             );
           })}

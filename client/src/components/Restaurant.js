@@ -11,6 +11,9 @@ const Restaurant = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchUrl = `http://localhost:5001/restaurants/${id}`;
+      const data = await fetchUrl.json();
+      setRestaurant(data);
+      setIsLoading(false);
       // FIXME: Make a fetch request and call setRestaurant with the response body
       setIsLoading(false);
     };
@@ -18,7 +21,7 @@ const Restaurant = () => {
   }, [id]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading please wait...</p>;
   }
 
   return (

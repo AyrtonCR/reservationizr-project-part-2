@@ -10,10 +10,11 @@
 }
 
 .single-restaurant {
+  box-shadow: 0.2rem 0.2rem 0.3rem 0.2rem rgb(215, 215, 215);
   list-style-type: none;
   display: grid;
   grid-template-rows: 1fr;
-  border: 0.1rem solid grey;
+
   margin-bottom: 3rem;
 }
 
@@ -47,4 +48,19 @@
 .login-btn:hover {
   background: white;
   color: #6246ea;
+}
+
+@media only screen and (min-width: 48rem) {
+  .single-restaurant {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 2fr;
+  }
+  .restaurant-name {
+    margin-top: 0.5rem;
+    padding: 0rem 0.8rem;
+  }
+
+  .restaurant-image {
+    padding: 0.8rem;
+  }
 }
