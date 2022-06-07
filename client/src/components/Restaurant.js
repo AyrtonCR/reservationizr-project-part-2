@@ -34,7 +34,7 @@ const Restaurant = () => {
               src={restaurant.image}
               alt={restaurant.address}
             />
-            <div className="tablet-div-1">
+            <div className="tablet-div-2">
               <h2 className="restaurant-name">{restaurant.name}</h2>
               <p className="restaurant-description">{restaurant.description}</p>
             </div>

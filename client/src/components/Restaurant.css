@@ -1,0 +1,4 @@
+.tablet-div-2 {
+  display: grid;
+  grid-template-rows: 0.3fr 1fr;
+}
