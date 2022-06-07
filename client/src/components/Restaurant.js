@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CreateReservation from "./CreateReservation";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./Restaurant.css";
 
 const Restaurant = () => {

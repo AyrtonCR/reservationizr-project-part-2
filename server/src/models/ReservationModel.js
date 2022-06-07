@@ -5,6 +5,7 @@ const reservationsSchema = new Schema({
   partySize: { type: Number, required: true },
   restaurantName: { type: String, required: true },
   date: { type: String, required: true },
+  createdBy: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Reservation", reservationsSchema);
