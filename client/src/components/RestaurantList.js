@@ -1,5 +1,6 @@
 import "./RestaurantList.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -47,7 +48,12 @@ const RestaurantList = () => {
                     {restaurant.description}
                   </p>
                   <div className="button-mover">
-                    <button className="reserve-button">Reserve Now → </button>
+                    <Link
+                      to={`/restaurants/${restaurant.id}`}
+                      className="reserve-button"
+                    >
+                      Reserve Now →{" "}
+                    </Link>
                   </div>
                 </div>
               </li>
