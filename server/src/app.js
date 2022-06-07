@@ -2,9 +2,17 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-// const { celebrate, Joi, errors, Segments } = require("celebrate");
+const { celebrate, Joi, errors, Segments } = require("celebrate");
+const { auth } = require("express-oauth2-jwt-bearer");
 const RestaurantModel = require("./models/RestaurantModel");
+const ReservationModel = require("./models/ReservationModel");
 const formatRestaurant = require("./formatRestaurants");
+const formatReservation = require("./formatReservation");
+
+const checkJwt = auth({
+  audience: "https://reservationizr.com",
+  issuerBaseURL: `https://dev-qlz4drmq.au.auth0.com/`,
+});
 
 app.use(cors());
 app.use(express.json());
@@ -47,5 +55,35 @@ app.get("/restaurants/:id", async (request, response) => {
     return response.status(400).send({ message: "The ID provided is Invalid" });
   }
 });
+
+app.post(
+  "/reservations",
+  checkJwt,
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      partySize: Joi.number().required(),
+      date: Joi.string().required(),
+      restaurantName: Joi.string().required(),
+    }),
+  }),
+
+  async (request, response, next) => {
+    try {
+      const { body, auth } = request;
+      const reservationBody = {
+        createdBy: auth.payload.sub,
+        ...body,
+      };
+      const reservation = new ReservationModel(reservationBody);
+      await reservation.save();
+      return response.status(201).send(formatReservation(reservation));
+    } catch (error) {
+      error.status = 400;
+      next(error);
+    }
+  }
+);
+
+app.use(errors());
 
 module.exports = app;
