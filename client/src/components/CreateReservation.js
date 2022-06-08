@@ -7,7 +7,7 @@ import "./CreateReservation.css";
 
 const CreateReservation = ({ restaurantName }) => {
   const [partySize, setPartySize] = useState("");
-  // const [restaurantName, setRestaurantName] = useState("");
+  const [restaurantsName, setRestaurantsName] = useState("");
   const [date, setDate] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,7 @@ const CreateReservation = ({ restaurantName }) => {
     const reservation = {
       partySize,
       date,
-      // restaurantName,
+      restaurantName,
     };
 
     const response = await fetch("http://localhost:5001/reservations", {
@@ -71,13 +71,13 @@ const CreateReservation = ({ restaurantName }) => {
               className="input"
               id="restaurantName"
               value={restaurantName}
-              // onChange={(e) => setRestaurantName(e.target.value)}
+              onChange={(e) => setRestaurantsName(e.target.value)}
               type="text"
               required
             />
 
-            <label className="label" htmlFor="guests">
-              Number of guests
+            <label className="label" htmlFor="partySize">
+              Party size
             </label>
             <input
               className="input"
