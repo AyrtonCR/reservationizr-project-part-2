@@ -84,6 +84,40 @@ app.post(
   }
 );
 
+app.get("/reservations", async (request, response) => {
+  const reservations = await ReservationModel.find();
+  if (reservations.length > 0) {
+    const formattedReservation = reservations.map((reservation) => {
+      return formatReservation(reservation);
+    });
+    response.status(200).json(formattedReservation);
+  } else {
+    return (
+      response
+        .status(200)
+        // Should the response above be something else //
+        .json({ message: "There are no saved reservations yet" })
+    );
+  }
+});
+
+app.get("/reservations/:id", async (request, response) => {
+  const { id } = request.params;
+
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    const reservation = await ReservationModel.findById(id);
+    if (reservation) {
+      return response.status(200).send(formatReservation(reservation));
+    } else {
+      return response
+        .status(404)
+        .send({ message: "The ID provided was not found" });
+    }
+  } else {
+    return response.status(400).send({ message: "The ID provided is Invalid" });
+  }
+});
+
 app.use(errors());
 
 module.exports = app;
