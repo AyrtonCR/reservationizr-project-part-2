@@ -29,10 +29,22 @@ const CreateReservation = ({ restaurantName }) => {
     });
   };
 
+  const DatePickerInput = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    return (
+      <DatePicker
+        selected={startDate}
+        onChange={(date: Date) => setStartDate(date)}
+        showTimeSelect
+        dateFormat="Pp"
+      />
+    );
+  };
+
   return (
     <>
       <div className="form-main-grid">
-        <h1 className="reserve-title">Reserve {restaurantName}</h1>
+        <h1 className="reservation-title">Reserve {restaurantName}</h1>
         <div className="form-second-grid">
           <form className="reservation-form" onSubmit={handleSubmit}>
             <label className="label" htmlFor="guests">
@@ -49,18 +61,15 @@ const CreateReservation = ({ restaurantName }) => {
             <label className="label" htmlFor="date">
               Date
             </label>
-            <input
-              className="input"
-              id="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              type="text"
-              required
-            />
-            {!isPending && <button className="button">Submit</button>}
+
+            <DatePickerInput />
+
+            {!isPending && (
+              <button className="reservation-button">Submit</button>
+            )}
             {isPending && (
-              <button className="button" disabled>
-                Adding Chirp ...
+              <button className="reservation-button" disabled>
+                Adding your reservation now ...
               </button>
             )}
           </form>

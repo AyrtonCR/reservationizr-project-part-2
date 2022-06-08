@@ -1,0 +1,49 @@
+.form-main-grid {
+  display: grid;
+}
+
+.reservation-title {
+}
+
+.form-second-grid {
+}
+
+.reservation-form {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.label {
+  margin-left: 0.5rem;
+}
+
+.input {
+  margin: 0.5rem;
+  width: fit-content;
+}
+
+.reservation-button {
+  text-decoration: none;
+  margin: 0.5rem;
+  padding: 0.8rem;
+
+  background: rgb(235, 33, 46);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 1rem;
+  border: 0.1rem solid rgb(235, 33, 46);
+  cursor: pointer;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.login-btn:focus,
+.login-btn:hover {
+  background: white;
+  color: #e2ea46;
+}
+
+.react-datepicker__input-container {
+  height: 1.5rem;
+  margin: 0.5rem;
+}
