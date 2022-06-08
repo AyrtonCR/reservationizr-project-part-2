@@ -5,9 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./CreateReservation.css";
 
-const CreateReservation = () => {
+const CreateReservation = ({ restaurantName }) => {
   const [partySize, setPartySize] = useState("");
-  const [restaurantName, setRestaurantName] = useState("");
+  // const [restaurantName, setRestaurantName] = useState("");
   const [date, setDate] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,7 @@ const CreateReservation = () => {
     const reservation = {
       partySize,
       date,
-      restaurantName,
+      // restaurantName,
     };
 
     const response = await fetch("http://localhost:5001/reservations", {
@@ -58,52 +58,20 @@ const CreateReservation = () => {
     );
   }
 
-  // const CreateReservation = ({ restaurantName }) => {
-  //   // const [restaurantName, setRestaurantName] = useState("");
-  //   const [partySize, setPartySize] = useState("");
-  //   const [date, setDate] = useState("");
-  //   const [isPending, setIsPending] = useState(false);
-  //   const [isError, setIsError] = useState(false);
-  //   const [errorStatus, setErrorStatus] = useState(false);
-  //   const navigate = useNavigate();
-
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     setIsPending(true);
-  //     const addForm = { partySize, date };
-
-  //     const response = await fetch("http://localhost:5001/reservations", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(addForm),
-  //     }).then(() => {
-  //       if (!response.ok) {
-  //         setIsError(true);
-  //         setErrorStatus(response.status);
-  //       } else {
-  //         console.log("new form added");
-  //         setIsPending(false);
-  //         navigate("/reservations");
-  //       }
-  //     });
-  //   };
-
   return (
     <>
       <div className="form-main-grid">
-        <h1 className="reservation-title">
-          Reserve RESTAURANT NAME WILL GO HERE
-        </h1>
+        <h1 className="reservation-title">Reserve {restaurantName}</h1>
         <div className="form-second-grid">
           <form className="reservation-form" onSubmit={handleSubmit}>
-            <label className="label" htmlFor="restauratntName">
+            <label className="label" htmlFor="restaurantName">
               Restaurant name
             </label>
             <input
               className="input"
               id="restaurantName"
               value={restaurantName}
-              onChange={(e) => setRestaurantName(e.target.value)}
+              // onChange={(e) => setRestaurantName(e.target.value)}
               type="text"
               required
             />

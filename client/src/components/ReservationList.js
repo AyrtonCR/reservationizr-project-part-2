@@ -45,7 +45,6 @@ const ReservationList = () => {
                   You have booked for {reservation.partySize} at the restaurant.
                 </p>
                 <p className="date">
-                  {" "}
                   The time your are booked for is {reservation.date}
                 </p>
               </li>
