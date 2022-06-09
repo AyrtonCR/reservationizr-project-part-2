@@ -1,8 +1,7 @@
-import "./ReservationList.css";
-import { formatDate } from "../utils/formatDate";
 import React, { useState, useEffect } from "react";
-import Restaurant from "./Restaurant";
+import { formatDate } from "../utils/formatDate";
 import { Link } from "react-router-dom";
+import "./ReservationList.css";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);

@@ -31,25 +31,21 @@
   padding-left: 0.6rem;
 }
 
-.input:focus {
-  outline: #a51818;
-}
 .reservation-button {
   text-decoration: none;
   margin: 0.5rem;
   padding: 0.5rem;
   background: rgb(233, 23, 37);
+  border: none;
   border-radius: 0.25rem;
   color: #fff;
   font-size: 1rem;
-  border: 0.1rem solid rgb(233, 23, 37);
   cursor: pointer;
   white-space: nowrap;
   width: 5.6rem;
 }
 
-.login-btn:focus,
-.login-btn:hover {
-  background: white;
-  color: #e2ea46;
+.reservation-button:hover {
+  background: rgb(0, 0, 0);
+  color: #ffffff;
 }

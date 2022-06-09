@@ -10,7 +10,7 @@
 }
 .single-reservation {
   display: grid;
-  grid-template-rows: 1fr 0.3fr 0.3fr;
+  grid-template-rows: 0.6fr 0.2fr 0.2fr;
   margin: 0 auto;
   padding-bottom: 1.3rem;
   border-bottom: 0.0625rem dashed #e6e6e6;
@@ -21,14 +21,14 @@
 .reservation-name {
   font-size: 1.4rem;
   padding: 0rem;
-  margin: 0.5rem 0rem;
-  padding-top: 1rem;
+  margin: 0.5rem 0.2rem;
+  margin-top: 1rem;
 }
 
 .reservation-date {
-  color: #828282;
+  color: #696868;
   padding: 0rem;
-  margin: 0.5rem 0rem;
+  margin: 0.5rem 0.2rem;
 }
 
 .reservation-party-size {
@@ -39,4 +39,20 @@
 .button {
   align-self: center;
   justify-self: center;
+}
+
+.view-details {
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 0.3rem;
+  background: none;
+  color: rgb(237, 36, 36);
+  list-style-type: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.view-details:hover {
+  background: rgb(255, 255, 255);
+  color: #000000;
 }

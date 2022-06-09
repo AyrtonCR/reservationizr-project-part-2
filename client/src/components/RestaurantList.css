@@ -45,9 +45,13 @@
   color: #fff;
 
   font-size: 1rem;
-  border: 0.1rem solid rgb(235, 33, 46);
+
   cursor: pointer;
   white-space: nowrap;
+}
+.reserve-button:hover {
+  background: rgb(0, 0, 0);
+  color: #ffffff;
 }
 
 .login-btn:focus,
