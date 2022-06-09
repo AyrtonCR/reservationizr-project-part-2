@@ -1,7 +1,7 @@
 const formatRestaurant = require("./formatRestaurants");
 
 describe("formatChirp", () => {
-  it("should return the chirp formatted with id", () => {
+  it("should return the RESTAURANT formatted with id", () => {
     const restaurant = {
       _id: "616005cae3c8e880c13dc0b9",
       name: "Curry Place",
