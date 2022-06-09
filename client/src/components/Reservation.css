@@ -1,0 +1,42 @@
+.reservation {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #ccc;
+}
+
+.main-grid {
+}
+.second-grid {
+}
+.single-reservation {
+  display: grid;
+  grid-template-rows: 1fr 0.3fr 0.3fr;
+  margin: 0 auto;
+  padding-bottom: 1.3rem;
+  border-bottom: 0.0625rem dashed #e6e6e6;
+  justify-content: left;
+  align-items: center;
+}
+
+.reservation-name {
+  font-size: 1.4rem;
+  padding: 0rem;
+  margin: 0.5rem 0rem;
+  padding-top: 1rem;
+}
+
+.reservation-date {
+  color: #828282;
+  padding: 0rem;
+  margin: 0.5rem 0rem;
+}
+
+.reservation-party-size {
+  padding: 0rem;
+  margin: 0.5rem 0rem;
+}
+
+.button {
+  align-self: center;
+  justify-self: center;
+}

@@ -7,9 +7,6 @@
   margin-left: 0.5rem;
 }
 
-.form-second-grid {
-}
-
 .reservation-form {
   display: grid;
   grid-template-rows: 1fr;
@@ -55,7 +52,4 @@
 .login-btn:hover {
   background: white;
   color: #e2ea46;
-}
-
-.react-datepicker__input-container {
 }

@@ -2,6 +2,7 @@ import "./ReservationList.css";
 import { formatDate } from "../utils/formatDate";
 import React, { useState, useEffect } from "react";
 import Restaurant from "./Restaurant";
+import { Link } from "react-router-dom";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
@@ -40,14 +41,15 @@ const ReservationList = () => {
             return (
               <li className="single-reservation">
                 {}
-                <p className="restaurant-name">{reservation.restaurantName}</p>
-                <p className="party-size">
-                  You have booked for {reservation.partySize} people at the
-                  restaurant.
+                <p className="reservation-name">
+                  <strong>{reservation.restaurantName}</strong>
                 </p>
-                <p className="date">
-                  The time your are booked for is {reservation.date}
+                <p className="reservation-date">
+                  {formatDate(reservation.date)}
                 </p>
+                <Link to={`/reservations/${reservation.id}`}>
+                  <button className="view-details">View details → </button>
+                </Link>
               </li>
             );
           })}
