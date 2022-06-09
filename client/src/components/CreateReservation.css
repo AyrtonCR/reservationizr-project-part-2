@@ -3,6 +3,8 @@
 }
 
 .reservation-title {
+  text-align: left;
+  margin-left: 0.5rem;
 }
 
 .form-second-grid {
@@ -12,29 +14,41 @@
   display: grid;
   grid-template-rows: 1fr;
 }
-
+.hidden-restaurant-name {
+  display: none;
+}
 .label {
   margin-left: 0.5rem;
+  width: fit-content;
 }
 
 .input {
   margin: 0.5rem;
-  width: fit-content;
+  height: 2rem;
+  border: rgb(198, 198, 198) 0.01rem solid;
+  width: 100%;
 }
 
+.reservation-form input[type="text"] {
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+}
+
+.input:focus {
+  outline: #a51818;
+}
 .reservation-button {
   text-decoration: none;
   margin: 0.5rem;
-  padding: 0.8rem;
-
-  background: rgb(235, 33, 46);
+  padding: 0.5rem;
+  background: rgb(233, 23, 37);
   border-radius: 0.25rem;
   color: #fff;
   font-size: 1rem;
-  border: 0.1rem solid rgb(235, 33, 46);
+  border: 0.1rem solid rgb(233, 23, 37);
   cursor: pointer;
   white-space: nowrap;
-  width: fit-content;
+  width: 5.6rem;
 }
 
 .login-btn:focus,
@@ -44,6 +58,4 @@
 }
 
 .react-datepicker__input-container {
-  height: 1.5rem;
-  margin: 0.5rem;
 }

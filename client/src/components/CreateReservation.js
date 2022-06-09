@@ -65,18 +65,19 @@ const CreateReservation = ({ restaurantName }) => {
         <h1 className="reservation-title">Reserve {restaurantName}</h1>
         <div className="form-second-grid">
           <form className="reservation-form" onSubmit={handleSubmit}>
-            <label className="label" htmlFor="restaurantName">
-              Restaurant name
-            </label>
-            <input
-              className="input"
-              id="restaurantName"
-              value={restaurantName}
-              onChange={(e) => setRestaurantsName(e.target.value)}
-              type="text"
-              required
-            />
-
+            <div className="hidden-restaurant-name">
+              <label className="label" htmlFor="restaurantName">
+                Restaurant name
+              </label>
+              <input
+                className="input"
+                id="restaurantName"
+                value={restaurantName}
+                onChange={(e) => setRestaurantsName(e.target.value)}
+                type="text"
+                required
+              />
+            </div>
             <label className="label" htmlFor="partySize">
               Party size
             </label>
