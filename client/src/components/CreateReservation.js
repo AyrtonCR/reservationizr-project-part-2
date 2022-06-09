@@ -8,7 +8,8 @@ import "./CreateReservation.css";
 const CreateReservation = ({ restaurantName }) => {
   const [partySize, setPartySize] = useState("");
   const [restaurantsName, setRestaurantsName] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -90,14 +91,18 @@ const CreateReservation = ({ restaurantName }) => {
             <label className="label" htmlFor="date">
               Date
             </label>
-            <input
+
+            <DatePicker
+              selected={date}
+              onChange={(date) => setDate(date)}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              showTimeSelect
               className="input"
               id="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
               type="text"
               required
-            ></input>
+            />
             {!isPending && (
               <button className="reservation-button">Submit</button>
             )}

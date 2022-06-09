@@ -40,9 +40,10 @@ const ReservationList = () => {
             return (
               <li className="single-reservation">
                 {}
-                <p className="restaurant-name"></p>
+                <p className="restaurant-name">{reservation.restaurantName}</p>
                 <p className="party-size">
-                  You have booked for {reservation.partySize} at the restaurant.
+                  You have booked for {reservation.partySize} people at the
+                  restaurant.
                 </p>
                 <p className="date">
                   The time your are booked for is {reservation.date}
