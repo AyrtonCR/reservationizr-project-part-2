@@ -84,8 +84,13 @@ app.post(
   }
 );
 
-app.get("/reservations", async (request, response) => {
-  const reservations = await ReservationModel.find();
+app.get("/reservations", checkJwt, async (request, response) => {
+  const { auth } = request;
+  const userId = auth.payload.sub;
+
+  const reservations = await ReservationModel.find({
+    createdBy: userId,
+  });
   if (reservations.length > 0) {
     const formattedReservation = reservations.map((reservation) => {
       return formatReservation(reservation);
@@ -101,13 +106,20 @@ app.get("/reservations", async (request, response) => {
   }
 });
 
-app.get("/reservations/:id", async (request, response) => {
+app.get("/reservations/:id", checkJwt, async (request, response) => {
   const { id } = request.params;
+
+  const { auth } = request;
+  const userId = auth.payload.sub;
 
   if (mongoose.Types.ObjectId.isValid(id)) {
     const reservation = await ReservationModel.findById(id);
     if (reservation) {
-      return response.status(200).send(formatReservation(reservation));
+      if (reservation.createdBy === userId) {
+        return response.status(200).send(formatReservation(reservation));
+      } else {
+        return response.status(403).send({ message: "Access is forbidden" });
+      }
     } else {
       return response
         .status(404)
