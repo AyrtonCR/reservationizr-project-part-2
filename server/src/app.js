@@ -101,12 +101,8 @@ app.get(
       });
       response.status(200).json(formattedReservation);
     } else {
-      return (
-        response
-          .status(200)
-          // Should the response above be something else //
-          .json({ message: "There are no saved reservations yet" })
-      );
+      return response.status(200);
+      // Should the response above be something else //
     }
   }
 );
