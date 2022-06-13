@@ -84,31 +84,35 @@ app.post(
   }
 );
 
-app.get("/reservations", checkJwt, async (request, response) => {
-  const { auth } = request;
-  const userId = auth.payload.sub;
+app.get(
+  "/reservations",
+  checkJwt,
 
-  const reservations = await ReservationModel.find({
-    createdBy: userId,
-  });
-  if (reservations.length > 0) {
-    const formattedReservation = reservations.map((reservation) => {
-      return formatReservation(reservation);
+  async (request, response) => {
+    const { auth } = request;
+    const userId = auth.payload.sub;
+    let reservations = [];
+    reservations = await ReservationModel.find({
+      createdBy: userId,
     });
-    response.status(200).json(formattedReservation);
-  } else {
-    return (
-      response
-        .status(200)
-        // Should the response above be something else //
-        .json({ message: "There are no saved reservations yet" })
-    );
+    if (reservations.length > 0) {
+      const formattedReservation = reservations.map((reservation) => {
+        return formatReservation(reservation);
+      });
+      response.status(200).json(formattedReservation);
+    } else {
+      return (
+        response
+          .status(200)
+          // Should the response above be something else //
+          .json({ message: "There are no saved reservations yet" })
+      );
+    }
   }
-});
+);
 
 app.get("/reservations/:id", checkJwt, async (request, response) => {
   const { id } = request.params;
-
   const { auth } = request;
   const userId = auth.payload.sub;
 

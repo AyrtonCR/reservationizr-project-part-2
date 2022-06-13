@@ -1,21 +1,29 @@
+import "./ReservationList.css";
 import React, { useState, useEffect } from "react";
 import { formatDate } from "../utils/formatDate";
 import { Link } from "react-router-dom";
-import "./ReservationList.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5001/reservations");
+      const accessToken = await getAccessTokenSilently();
+      const response = await fetch("http://localhost:5001/reservations", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await response.json();
       setReservations(data);
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [getAccessTokenSilently]);
 
   if (isLoading) {
     return <p>Loading please wait...</p>;
