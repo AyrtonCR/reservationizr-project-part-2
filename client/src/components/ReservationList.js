@@ -25,11 +25,13 @@ const ReservationList = () => {
     fetchData();
   }, [getAccessTokenSilently]);
 
-  if (reservations.length < 1) {
+  if (reservations.length === 0) {
     return (
       <>
         <h1>Upcoming reservations</h1>
-        <p className="no-reservations-found">You dont have any reservations.</p>
+        <p className="no-reservations-found">
+          You don't have any reservations.
+        </p>
         <Link to="/">
           <button className="view-details">View the restaurants</button>
         </Link>
