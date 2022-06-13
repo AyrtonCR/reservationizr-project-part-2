@@ -56,34 +56,6 @@ app.get("/restaurants/:id", async (request, response) => {
   }
 });
 
-app.post(
-  "/reservations",
-  checkJwt,
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      partySize: Joi.number().required(),
-      date: Joi.string().required(),
-      restaurantName: Joi.string().required(),
-    }),
-  }),
-
-  async (request, response, next) => {
-    try {
-      const { body, auth } = request;
-      const reservationBody = {
-        createdBy: auth.payload.sub,
-        ...body,
-      };
-      const reservation = new ReservationModel(reservationBody);
-      await reservation.save();
-      return response.status(201).send(formatReservation(reservation));
-    } catch (error) {
-      error.status = 400;
-      next(error);
-    }
-  }
-);
-
 app.get(
   "/reservations",
   checkJwt,
@@ -130,6 +102,33 @@ app.get("/reservations/:id", checkJwt, async (request, response) => {
   }
 });
 
+app.post(
+  "/reservations",
+  checkJwt,
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      partySize: Joi.number().required(),
+      date: Joi.string().required(),
+      restaurantName: Joi.string().required(),
+    }),
+  }),
+
+  async (request, response, next) => {
+    try {
+      const { body, auth } = request;
+      const reservationBody = {
+        createdBy: auth.payload.sub,
+        ...body,
+      };
+      const reservation = new ReservationModel(reservationBody);
+      await reservation.save();
+      return response.status(201).send(formatReservation(reservation));
+    } catch (error) {
+      error.status = 400;
+      next(error);
+    }
+  }
+);
 app.use(errors());
 
 module.exports = app;

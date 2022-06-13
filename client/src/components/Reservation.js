@@ -9,6 +9,7 @@ const Reservation = () => {
   const { id } = useParams();
   const [reservation, setReservation] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
@@ -20,44 +21,64 @@ const Reservation = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      const data = await fetchUrl.json();
-      setReservation(data);
-      setIsLoading(false);
-      // FIXME: Make a fetch request and call setRestaurant with the response body
+
+      if (fetchUrl.ok) {
+        const data = await fetchUrl.json();
+        setReservation(data);
+        setNotFound(false);
+        setIsLoading(false);
+      } else {
+        setNotFound(true);
+        setIsLoading(false);
+      }
     };
     fetchData();
-  }, [getAccessTokenSilently, id]);
+  }, [id, getAccessTokenSilently]);
 
   if (isLoading) {
     return <p>Loading please wait...</p>;
   }
 
-  return (
-    <>
-      <div className="main-grid">
-        <h1>Reservation</h1>
-        <ul className="second-grid">
-          <li className="single-reservation">
-            {}
-            <p className="reservation-name">
-              <strong>{reservation.restaurantName}</strong>
-            </p>
-            <p className="single-reservation-date">
-              {formatDate(reservation.date)}
-            </p>
-            <p className="reservation-party-size">
-              <strong>Party Size: {reservation.partySize}</strong>
-            </p>
-          </li>
-          <Link to={`/reservations/`}>
-            <button className="back-to-reservations">
-              ← Back to Reservations{" "}
-            </button>
-          </Link>
-        </ul>
-      </div>
-    </>
-  );
+  if (notFound) {
+    return (
+      <>
+        <p className="no-reservation-found">
+          <strong> Sorry! We can't find that reservation.</strong>
+        </p>
+        <Link to={`/reservations/`}>
+          <button className="back-to-reservations-2">
+            ← Back to Reservations
+          </button>
+        </Link>
+      </>
+    );
+  } else
+    return (
+      <>
+        <div className="main-grid">
+          <h1>Reservation</h1>
+          <ul className="second-grid">
+            <li className="single-reservation">
+              {}
+              <p className="reservation-name">
+                <strong>{reservation.restaurantName}</strong>
+              </p>
+              <p className="single-reservation-date">
+                {formatDate(reservation.date)}
+              </p>
+              <p className="reservation-party-size">
+                <strong>Party Size: {reservation.partySize}</strong>
+              </p>
+            </li>
+            <Link to={`/reservations/`}>
+              <button className="back-to-reservations">
+                ← Back to Reservations{" "}
+              </button>
+            </Link>
+          </ul>
+        </div>
+      </>
+    );
 };
 
 export default Reservation;
