@@ -145,23 +145,21 @@ describe("app", () => {
   /// /// /// POST Route Tests ///
   /// /// /// /// /// /// /// ///
 
-  it("a post to POST/reservations creates a new reservation that is formatted correctly according to the API spec", async () => {
+  it("should post to /reservations and create a new reservation that is formatted correctly according to the API spec", async () => {
     const expectedStatus = 201;
     const body = {
+      createdBy: "mock-user-id",
+      date: "2023-09-28",
       partySize: 1,
-      date: "2023-09-28T12:00:00.000Z",
       restaurantName: "Curry Place",
-      userId: "mock-user-id",
     };
 
-    await request(app)
-      .post("/reservations")
-      .send(body)
-      .expect(expectedStatus)
-      .expect((response) => {
-        expect(response.body).toEqual(expect.objectContaining(body));
-        expect(response.body.id).toBeTruthy();
-      });
+    const response = await request(app).post("/reservations").send(body);
+
+    expect(expectedStatus);
+
+    expect(response.body.createdBy).toEqual("mock-user-id");
+    expect(response.body.id).toBeDefined();
   });
 
   // it("POST /reservations returns a 400 when a negative ................. is used", async () => {
