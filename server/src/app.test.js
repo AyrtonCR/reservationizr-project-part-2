@@ -116,6 +116,17 @@ describe("app", () => {
         expect(response.status).toBe(200);
       });
   });
+
+  it("should give a 403 forbidden access when trying to access another users reservations", async () => {
+    await request(app)
+      .get("/reservations/61679189b54f48aa6599a7fd")
+      .expect((response) => {
+        const expected = { message: "Access is forbidden" };
+        expect(response.body).toEqual(expected);
+        expect(response.status).toBe(403);
+      });
+  });
+
   it("should return an invalid id message when receiving an invalid reservation id with a 400 status", async () => {
     await request(app)
       .get("/reservations/bad-id")
@@ -151,5 +162,25 @@ describe("app", () => {
     expect(response.status).toBe(201);
     expect(response.body.userId).toEqual("mock-user-id");
     expect(response.body.id).toBeDefined();
+  });
+
+  it("should return 400 if required validation error happens on POST /reservations", async () => {
+    const body = {};
+    const response = await request(app).post("/reservations").send(body);
+
+    expect(response.status).toBe(400);
+  });
+
+  it("should return 400 if partySize is less than 0 on POST /reservations", async () => {
+    const body = {
+      _id: { $oid: "507f1f77bcf86cd799439011" },
+      partySize: -2,
+      date: { $date: "2023-11-17T06:30:00.000Z" },
+      userId: "mock-user-id",
+      restaurantName: "Island Grill",
+    };
+    const response = await request(app).post("/reservations").send(body);
+
+    expect(response.status).toBe(400);
   });
 });
