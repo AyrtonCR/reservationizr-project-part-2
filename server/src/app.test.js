@@ -96,13 +96,6 @@ describe("app", () => {
             userId: "mock-user-id",
             restaurantName: "Green Curry",
           },
-          {
-            id: "61679189b54f48aa6599a7fd",
-            partySize: 2,
-            date: "2023-12-03T07:00:00.000Z",
-            userId: "another-user-id",
-            restaurantName: "Green Curry",
-          },
         ];
         expect(response.body).toEqual(expected);
         expect(response.status).toBe(200);
@@ -147,6 +140,7 @@ describe("app", () => {
 
   it("should post to /reservations and create a new reservation that is formatted correctly according to the API spec", async () => {
     const body = {
+      userId: "mock-user-id",
       date: "2023-09-28",
       partySize: 1,
       restaurantName: "Curry Place",

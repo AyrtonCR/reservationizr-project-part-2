@@ -65,7 +65,7 @@ app.get(
     const userId = auth.payload.sub;
     let reservations = [];
     reservations = await ReservationModel.find({
-      createdBy: userId,
+      userId: userId,
     });
     if (reservations.length > 0) {
       const formattedReservation = reservations.map((reservation) => {
@@ -87,7 +87,7 @@ app.get("/reservations/:id", checkJwt, async (request, response) => {
   if (mongoose.Types.ObjectId.isValid(id)) {
     const reservation = await ReservationModel.findById(id);
     if (reservation) {
-      if (reservation.createdBy === userId) {
+      if (reservation.userId === userId) {
         return response.status(200).send(formatReservation(reservation));
       } else {
         return response.status(403).send({ message: "Access is forbidden" });
@@ -110,7 +110,7 @@ app.post(
       partySize: Joi.number().required(),
       date: Joi.string().required(),
       restaurantName: Joi.string().required(),
-      createdBy: Joi.string(),
+      userId: Joi.string().required(),
     }),
   }),
 
@@ -118,7 +118,7 @@ app.post(
     try {
       const { body, auth } = request;
       const reservationBody = {
-        createdBy: auth.payload.sub,
+        userId: auth.payload.sub,
         ...body,
       };
       const reservation = new ReservationModel(reservationBody);
