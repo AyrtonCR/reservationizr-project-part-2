@@ -18,8 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", async (request, response) => {
-  response.send("Home Page: Please type a valid endpoints to receive data");
-  // does it need the async //
+  response.send("Home Page: Please type a valid endpoint to receive data");
 });
 
 app.get("/restaurants", async (request, response) => {

@@ -1,9 +1,6 @@
 const app = require("./app");
 const request = require("supertest");
 
-/// /// /// /// /// /// /// ///
-/// /// /// Restaurants /// ///
-/// /// /// /// /// /// /// ///
 describe("app", () => {
   it("should retrieve a list of all the restaurants formatted according to the API spec", async () => {
     await request(app)
@@ -73,10 +70,6 @@ describe("app", () => {
       });
   });
 
-  /// /// /// /// /// /// /// ///
-  /// /// /// Reservations /// ///
-  /// /// /// /// /// /// /// ///
-
   it("should retrieve a list of all the reservations formatted according to the API spec", async () => {
     await request(app)
       .get("/reservations")
@@ -145,13 +138,9 @@ describe("app", () => {
         expect(response.status).toBe(404);
       });
   });
-  /// /// /// /// /// /// /// ///
-  /// /// /// POST Route Tests ///
-  /// /// /// /// /// /// /// ///
 
   it("should post to /reservations and create a new reservation that is formatted correctly according to the API spec", async () => {
     const body = {
-      userId: "mock-user-id",
       date: "2023-09-28",
       partySize: 1,
       restaurantName: "Curry Place",

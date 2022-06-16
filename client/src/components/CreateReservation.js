@@ -9,7 +9,6 @@ const CreateReservation = ({ restaurantName }) => {
   const [partySize, setPartySize] = useState("");
   const [restaurantsName, setRestaurantsName] = useState("");
   const [date, setDate] = useState(null);
-  // const [selectedDate, setSelectedDate] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -27,22 +26,29 @@ const CreateReservation = ({ restaurantName }) => {
       date,
       restaurantName,
     };
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/reservations`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(reservation),
+        }
+      );
 
-    const response = await fetch("http://localhost:5001/reservations", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(reservation),
-    });
-
-    if (!response.ok) {
+      if (!response.ok) {
+        setIsError(true);
+        setErrorStatus(response.status);
+      } else {
+        setIsLoading(false);
+        navigate("/reservations");
+      }
+    } catch (error) {
       setIsError(true);
-      setErrorStatus(response.status);
-    } else {
-      setIsLoading(false);
-      navigate("/reservations");
+      setErrorStatus("unknown");
     }
   };
 
