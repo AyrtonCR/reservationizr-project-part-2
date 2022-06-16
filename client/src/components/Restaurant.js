@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CreateReservation from "./CreateReservation";
-import { useAuth0 } from "@auth0/auth0-react";
 import "./Restaurant.css";
 
 const Restaurant = () => {
@@ -17,7 +16,6 @@ const Restaurant = () => {
       const data = await fetchUrl.json();
       setRestaurant(data);
       setIsLoading(false);
-      // FIXME: Make a fetch request and call setRestaurant with the response body
     };
     fetchData();
   }, [id]);

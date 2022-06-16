@@ -58,9 +58,6 @@ const CreateReservation = ({ restaurantName }) => {
         <p className="no-properties">
           Error creating a property (error status {errorStatus})
         </p>
-        {/* <Link to="/" className="button">
-          Return to properties
-        </Link> */}
       </>
     );
   }
