@@ -110,7 +110,6 @@ app.post(
       partySize: Joi.number().required(),
       date: Joi.string().required(),
       restaurantName: Joi.string().required(),
-      userId: Joi.string().required(),
     }),
   }),
 
