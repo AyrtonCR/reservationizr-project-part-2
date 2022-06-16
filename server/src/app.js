@@ -29,12 +29,9 @@ app.get("/restaurants", async (request, response) => {
     });
     response.status(200).json(formattedRestaurant);
   } else {
-    return (
-      response
-        .status(200)
-        // Should the response above be something else //
-        .json({ message: "There are no saved restaurants yet" })
-    );
+    return response
+      .status(200)
+      .json({ message: "There are no saved restaurants yet" });
   }
 });
 
@@ -73,7 +70,6 @@ app.get(
       response.status(200).json(formattedReservation);
     } else {
       return response.status(200);
-      // Should the response above be something else //
     }
   }
 );
